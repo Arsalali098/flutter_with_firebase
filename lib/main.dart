@@ -98,39 +98,6 @@ class _MyAppState extends State<MyApp> {
                       foregroundColor: Colors.white,
                     )
                   ),
-
-                  ElevatedButton(
-                      onPressed: (){
-                        readData();
-                      },
-                      child: Text("Read"),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
-                      )
-                  ),
-
-                  ElevatedButton(
-                      onPressed: (){
-                        updateData();
-                      },
-                      child: Text("Update"),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        foregroundColor: Colors.white,
-                      )
-                  ),
-
-                  ElevatedButton(
-                      onPressed: (){
-                        deleteData(nameController.text);
-                      },
-                      child: Text("Delete"),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
-                        foregroundColor: Colors.white,
-                      )
-                  ),
                 ],
               ),
             ),
@@ -153,13 +120,9 @@ class _MyAppState extends State<MyApp> {
                       itemCount: list.length,
                       itemBuilder: (context, index) {
                         return ListTile(
-                          title: Text(list[index]['userName'] ?? ""),
-                          subtitle: Text(list[index]['userEmail'] ?? ""),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.red),
-                            onPressed: () {
-                              deleteData(list[index]['userName']);
-                            },
+                                icon: const Icon(Icons.delete, color: Colors.red),
+                                onPressed: () {
+                                },
                           ),
                           onTap: () {
                             nameController.text = list[index]['userName'] ?? "";
@@ -299,8 +262,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   void clearFields() {
-    nameController.clear();
-    emailController.clear();
-    passwordController.clear();
+      nameController.clear();
+      emailController.clear();
+      passwordController.clear();
   }
 }
