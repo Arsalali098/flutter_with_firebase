@@ -120,9 +120,30 @@ class _MyAppState extends State<MyApp> {
                       itemCount: list.length,
                       itemBuilder: (context, index) {
                         return ListTile(
+                          title: Text("Username: ${list[index]['userName'] ?? ""}"),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Email: ${list[index]['userEmail'] ?? ""}"),
+                              Text("Password: ${list[index]['userPassword'] ?? ""}"),
+                            ],
+                          ),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.edit, color: Colors.black),
+                                onPressed: () {
+                                  updateData();
+                                },
+                              ),
+                              IconButton(
                                 icon: const Icon(Icons.delete, color: Colors.red),
                                 onPressed: () {
+                                  deleteData(list[index]['userName'] ?? "");
                                 },
+                              ),
+                            ],
                           ),
                           onTap: () {
                             nameController.text = list[index]['userName'] ?? "";
@@ -209,7 +230,7 @@ class _MyAppState extends State<MyApp> {
                 "userPassword": passwordController.text
               };
 
-              dbRef.child(nameController.text).update(users).then((_) {
+              dbRef.child(nameController.text).update(users).then((a) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text("Data Updated Successfully")),
                 );
@@ -262,8 +283,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   void clearFields() {
+    setState(() {
       nameController.clear();
       emailController.clear();
       passwordController.clear();
+    });
   }
 }
