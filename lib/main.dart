@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_with_firebase/utils/notification_helper.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await NotificationHelper().initNotifications();
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -230,7 +232,7 @@ class _MyAppState extends State<MyApp> {
                 "userPassword": passwordController.text
               };
 
-              dbRef.child(nameController.text).update(users).then((a) {
+              dbRef.child(nameController.text).update(users).then((datasnapshot) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text("Data Updated Successfully")),
                 );
